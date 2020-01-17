@@ -39,34 +39,98 @@ class BST {
     BST(const BST<Data>& bst) : root(0), isize(0), iheight(-1) {}
 
     /** TODO */
-    ~BST() {}
+    ~BST() { deleteAll(root); }
 
     /** TODO */
-    bool insert(const Data& item) { return false; }
+    bool insert(const Data& item) {  // Creates root node if tree doesn't exist
+        if (root == nullptr) {
+            root = new BSTNode<Data>(item);
+            isize++;
+            return true;
+        }
+
+        BSTNode<Data>* curr;
+        curr = root;
+
+        // while curr->data != item
+        while (!(!(curr->getData() < item) && !(item < curr->getData()))) {
+            if (item < curr->getData()) {
+                if (curr->left == nullptr) {
+                    curr->left = new BSTNode<Data>(item);
+                    curr->left->parent = curr;  // Reassigns pointer
+                    isize++;
+                    return true;
+                } else if (curr->left != nullptr) {
+                    curr = curr->left;
+                }
+            } else if (curr->getData() < item) {
+                if (curr->right == nullptr) {
+                    curr->right = new BSTNode<Data>(item);
+                    curr->right->parent = curr;  // Reassigns pointer
+                    isize++;
+                    return true;
+                } else if (curr->right != nullptr) {
+                    curr = curr->right;
+                }
+            }
+        }
+
+        // Returns false if node with data == item exists
+        return false;
+    }
 
     /** TODO */
-    iterator find(const Data& item) const { return 0; }
+    iterator find(const Data& item) const {
+        if (root == nullptr) {
+            return end();
+        }
+        BSTNode<Data>* curr = root;
+
+        while (!(!(curr->getData() < item) && !(item < curr->getData()))) {
+            if (item < curr->getData()) {
+                curr = curr->left;
+            } else if (curr->getData() < item) {
+                curr = curr->right;
+            } else if (curr == nullptr) {
+                return BST<Data>::iterator(nullptr);
+            }
+        }
+        return BST<Data>::iterator(curr);
+    }
 
     /** TODO */
     bool deleteNode(const Data& item) { return false; }
 
     /** TODO */
-    unsigned int size() const { return 0; }
+    unsigned int size() const { return isize; }
 
     /** TODO */
-    int height() const { return 0; }
+    int height() const { return getHeight(root); }
 
     /** TODO */
-    bool empty() const { return false; }
+    bool empty() const {
+        if (isize == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     /** TODO */
-    iterator begin() const { return 0; }
+    iterator begin() const { return BST<Data>::iterator(first(root)); }
 
     /** Return an iterator pointing past the last item in the BST. */
     iterator end() const { return typename BST<Data>::iterator(0); }
 
     /** TODO */
-    vector<Data> inorder() const {}
+    vector<Data> inorder() const {
+        vector<Data> list;
+        if (root == nullptr) {
+            return list;
+        }
+        inOrderHelper(root, list);
+        return list;
+    }
 
     /**
      * DO NOT CHANGE THIS METHOD
@@ -115,16 +179,27 @@ class BST {
 
   private:
     /** TODO Helper function for begin() */
-    static BSTNode<Data>* first(BSTNode<Data>* root) { return 0; }
+    static BSTNode<Data>* first(BSTNode<Data>* root) {
+        BSTNode<Data>* curr = root;
+        if (curr != nullptr) {
+            while (curr->left != nullptr) {
+                curr = curr->left;
+            }
+        }
+        return curr;
+    }
 
     /** TODO */
     static void deleteAll(BSTNode<Data>* n) {
-        /* Pseudocode:
-           if current node is null: return;
-           recursively delete left sub-tree
-           recursively delete right sub-tree
-           delete current node
-        */
+        // if current node is null: return;
+        if (n == nullptr) {
+            return;
+        }
+        deleteAll(n->left);   // recursively delete left sub-tree
+        deleteAll(n->right);  // recursively delete right sub-tree
+
+        // delete current node
+        delete n;
     }
 
     /** TODO */
@@ -134,6 +209,28 @@ class BST {
     }
 
     // Add more helper functions below
+    int getHeight(BSTNode<Data>* n) const {
+        if (n == nullptr) {
+            return -1;
+        }
+        int leftSize = getHeight(n->left);
+        int rightSize = getHeight(n->right);
+
+        if (rightSize < leftSize) {
+            return leftSize + 1;
+        } else {
+            return rightSize + 1;
+        }
+    }
+    // inOrderHelper
+    static void inOrderHelper(BSTNode<Data>* n, vector<Data>& addList) {
+        if (n == nullptr) {
+            return;
+        }
+        inOrderHelper(n->left, addList);
+        addList.push_back(n->getData());
+        inOrderHelper(n->right, addList);
+    }
 };
 
 #endif  // BST_HPP
