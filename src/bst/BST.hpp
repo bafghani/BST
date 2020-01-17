@@ -82,9 +82,10 @@ class BST {
 
     /** TODO */
     iterator find(const Data& item) const {
-        /*if (root == nullptr) {
+        if (root == nullptr) {
             return end();
         }
+
         BSTNode<Data>* curr = root;
 
         while (!(!(curr->getData() < item) && !(item < curr->getData()))) {
@@ -92,12 +93,13 @@ class BST {
                 curr = curr->left;
             } else if (curr->getData() < item) {
                 curr = curr->right;
-            } else if (curr == nullptr) {
-                return BST<Data>::iterator(nullptr);
+            }
+
+            if (curr == nullptr) {
+                return BST<Data>::iterator(0);
             }
         }
-        return BST<Data>::iterator(curr);*/
-        return 0;
+        return BST<Data>::iterator(curr);
     }
 
     /** TODO */
