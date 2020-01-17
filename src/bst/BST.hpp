@@ -129,6 +129,8 @@ class BST {
             return list;
         }
         inOrderHelper(root, list);
+        for (unsigned int i = 0; i < list.size(); i++)
+            std::cout << list.at(i) << ' ';
         return list;
     }
 
@@ -181,11 +183,14 @@ class BST {
     /** TODO Helper function for begin() */
     static BSTNode<Data>* first(BSTNode<Data>* root) {
         BSTNode<Data>* curr = root;
-        if (curr != nullptr) {
-            while (curr->left != nullptr) {
-                curr = curr->left;
-            }
+        if (curr == nullptr) {
+            return nullptr;
         }
+
+        while (curr->left != nullptr) {
+            curr = curr->left;
+        }
+
         return curr;
     }
 
