@@ -43,6 +43,7 @@ class BST {
 
     /** TODO */
     bool insert(const Data& item) {  // Creates root node if tree doesn't exist
+        std::cout << item;
         if (root == nullptr) {
             root = new BSTNode<Data>(item);
             isize++;
@@ -81,7 +82,7 @@ class BST {
 
     /** TODO */
     iterator find(const Data& item) const {
-        if (root == nullptr) {
+        /*if (root == nullptr) {
             return end();
         }
         BSTNode<Data>* curr = root;
@@ -95,7 +96,8 @@ class BST {
                 return BST<Data>::iterator(nullptr);
             }
         }
-        return BST<Data>::iterator(curr);
+        return BST<Data>::iterator(curr);*/
+        return 0;
     }
 
     /** TODO */
