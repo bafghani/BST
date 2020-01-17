@@ -58,6 +58,29 @@ TEST_F(SmallBSTFixture, SMALL_INSERT_DUPLICATES_TEST) {
     ASSERT_FALSE(bst.insert(3));
 }
 
-
-
 // TODO: add more BST tests here
+TEST_F(SmallBSTFixture, HEIGHT_TEST) {
+    // assert height is 2
+    ASSERT_EQ(bst.height(), 2);
+}
+
+TEST_F(SmallBSTFixture, INSERT_TEST) {
+    // assert successful insertion
+    ASSERT_TRUE(bst.insert(50));
+}
+
+TEST_F(SmallBSTFixture, EMPTY_TEST) {
+    // assert tree is not empty
+    ASSERT_FALSE(bst.empty());
+}
+
+TEST_F(SmallBSTFixture, INORDER_TEST) {
+    // assert correct inorder traversal
+    vector<int> vect;
+    vect.push_back(-33);
+    vect.push_back(1);
+    vect.push_back(3);
+    vect.push_back(4);
+    vect.push_back(100);
+    ASSERT_EQ(bst.inorder(), vect);
+}

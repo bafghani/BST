@@ -133,8 +133,6 @@ class BST {
             return list;
         }
         inOrderHelper(root, list);
-        for (unsigned int i = 0; i < list.size(); i++)
-            std::cout << list.at(i) << ' ';
         return list;
     }
 
