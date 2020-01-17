@@ -1,5 +1,6 @@
 /**
- * TODO: add file header
+ * Name: Joseph Mattingly
+ * Name: Bijan Afghani
  */
 #ifndef BSTITERATOR_HPP
 #define BSTITERATOR_HPP

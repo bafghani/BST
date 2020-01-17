@@ -1,5 +1,6 @@
 /**
- * TODO: add file header
+ * Name: Joseph Mattingly
+ * Name: Bijan Afghani
  */
 #ifndef BST_HPP
 #define BST_HPP

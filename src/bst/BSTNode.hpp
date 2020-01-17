@@ -1,6 +1,8 @@
 /**
- * TODO: add file header
+ * Name: Joseph Mattingly
+ * Name: Bijan Afghani
  */
+
 #ifndef BSTNODE_HPP
 #define BSTNODE_HPP
 #include <iomanip>
