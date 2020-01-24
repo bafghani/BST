@@ -29,13 +29,28 @@ class BSTNode {
         parent = nullptr;
     }
 
-    /** Set the value of data */
+    /**
+     * Sets the data for a BSTnode.
+     *
+     * @param d The value that BSTnode's data will be set to.
+     */
     void setData(const Data& d) { data = d; }
 
-    /** Get the value of data */
+    /** Returns the value of data stored in a BSTnode.
+     *
+     * @return the data in node.
+     */
     Data getData() { return data; }
 
-    /** TODO */
+    /**
+     * Returns a BSTNode pointer that points to the successor
+     * of the current BSTNode.
+     *
+     * The successor is the smallest element that is larger
+     * than this BSTNode.
+     *
+     * @return a BSTNode pointer pointing to the successor.
+     */
     BSTNode<Data>* successor() {
         BSTNode<Data>* curr = this;  // pointer to current node
 
