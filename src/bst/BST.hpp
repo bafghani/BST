@@ -119,10 +119,6 @@ class BST {
             }
             if (curr == nullptr) {
                 return BST<Data>::iterator(nullptr);
-
-                if (curr == nullptr) {
-                    return BST<Data>::iterator(0);
-                }
             }
             return BST<Data>::iterator(curr);
         }
@@ -134,62 +130,79 @@ class BST {
      * false otherwise
      */
     bool deleteNode(const Data& item) {
-        if (root == nullptr) return false;
+        if (root == nullptr) {
+            return false;
+        }
         BSTNode<Data>* curr = root;
         // while curr->getData() != item
         while (!(!(curr->getData() < item) && !(item < curr->getData()))) {
-            if (item < curr->getData())
+            if (item < curr->getData()) {
                 curr = curr->left;
-            else if (curr->getData() < item)
+            } else if (curr->getData() < item) {
                 curr = curr->right;
-            if (curr == nullptr) return false;
+            }
+            if (curr == nullptr) {
+                return false;
+            }
         }
 
         // if curr->getData() == item then this code will execute
         // case 1 (no children)
         if (curr->left == nullptr && curr->right == nullptr) {
             // remove edge from curr->parent to curr
+            if (curr->parent != nullptr) {
+                if (curr = curr->parent->left) {
+                    curr->parent->left = nullptr;
+                } else {
+                    curr->parent->right = nullptr;
+                }
+            }
             delete curr;
             return true;
         }
+
         // case 2 (1 child)
         else if (curr->left == nullptr || curr->right == nullptr) {
             // curr->parent point to curr->child instead of to curr
             if (curr->left == nullptr) {
                 if (curr->parent != nullptr) {
-                    if (curr = curr->parent->right)
+                    if (curr = curr->parent->right) {
                         curr->parent->right = curr->right;
-                    else
+                    } else {
                         curr->parent->left = curr->right;
+                    }
                 }
+
                 delete curr;
                 return true;
             } else {
                 if (curr->parent != nullptr) {
-                    if (curr = curr->parent->right)
+                    if (curr = curr->parent->right) {
                         curr->parent->right = curr->left;
-                    else
+                    } else {
                         curr->parent->left = curr->left;
+                    }
                 }
                 delete curr;
                 return true;
             }
         }
+
         // case 3 (2 children)
         else {
             BSTNode<Data>* s = curr->successor();
+            if (s->parent != nullptr) {
+                if (s == s->parent->left) {
+                    s->parent->left = s->right;
+                } else {
+                    s->parent->right = s->right;
+                }
+            }
             curr->setData(s->getData());
             delete s;
-            return true;
-            /*if (s == s->parent->left) {
-                s->parent->left = s->right;
-                delete s;
-            } else {
-                s->parent->right = s->right;
-                curr->setData(s->getData());
-                delete s;
-            }*/
         }
+        isize--;
+        return true;
     }
 
     /** returns the number of nodes in the BST*/
