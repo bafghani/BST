@@ -150,6 +150,7 @@ class BST {
         if (curr->left == nullptr && curr->right == nullptr) {
             // remove edge from curr->parent to curr
             delete curr;
+            return true;
         }
         // case 2 (1 child)
         else if (curr->left == nullptr || curr->right == nullptr) {
@@ -162,6 +163,7 @@ class BST {
                         curr->parent->left = curr->right;
                 }
                 delete curr;
+                return true;
             } else {
                 if (curr->parent != nullptr) {
                     if (curr = curr->parent->right)
@@ -170,13 +172,15 @@ class BST {
                         curr->parent->left = curr->left;
                 }
                 delete curr;
+                return true;
             }
         }
         // case 3 (2 children)
-        else if {
+        else {
             BSTNode<Data>* s = curr->successor();
             curr->setData(s->getData());
             delete s;
+            return true;
             /*if (s == s->parent->left) {
                 s->parent->left = s->right;
                 delete s;
@@ -186,7 +190,6 @@ class BST {
                 delete s;
             }*/
         }
-        return true;
     }
 
     /** returns the number of nodes in the BST*/
