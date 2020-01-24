@@ -143,12 +143,10 @@ class BST {
             if (curr == curr->parent->left) {
                 curr = curr->parent;
                 delete curr->left;
-                curr->left = nullptr;
 
             } else {
                 curr = curr->parent;
                 delete curr->right;
-                curr->right = nullptr;
             }
         }
         // case 2 (1 child)
