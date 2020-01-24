@@ -29,7 +29,6 @@ class BST {
 
     // height of this BST.
     int iheight;
-
   public:
     /** Define iterator as an aliased typename for BSTIterator<Data>. */
     typedef BSTIterator<Data> iterator;
@@ -366,24 +365,30 @@ class BST {
     }
 
     /** TODO */
+    const int BALANCE = 2;
     BSTNode<Data>* buildSubtree(vector<Data>& data, int start, int end,
                                 int depth) {
         if (start > end) {
             return nullptr;
         }
-        if (data.empty()) {
+        if (data.size() == 0) {
             return nullptr;
         }
+        if (start == end) {
+            BSTNode<Data>* node = new BSTNode<Data>(data[end]);
+            return node;
+        }
+        int length = 1 + end - start;
+        int mid = start + (length) / BALANCE;
 
-        int mid = (start + end) / 2;
         BSTNode<Data>* root = new BSTNode<Data>(data[mid]);
 
         root->left = buildSubtree(data, start, mid - 1, depth);
         root->left->parent = root;
-        depth++;
-        root->right = buildSubtree(data, mid + 1, end, depth);
-        root->right->parent = root;
-
+        if (mid < end) {
+            root->right = buildSubtree(data, mid + 1, end, depth);
+            root->right->parent = root;
+        }
         return root;
     }
 
