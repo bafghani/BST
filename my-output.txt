@@ -2,7 +2,7 @@ GREETINGS! TYPE COMMANDS TO VISUALIZE YOUR BST.
 Insert: Successfully inserted value 1
 Insert: Successfully inserted value 3
 Insert: Successfully inserted value 5
-Find: Value 2 found!
+Find: Value 2 not found!
 Empty: false
 Iterator: 1
 Iterator: 3
