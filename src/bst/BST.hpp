@@ -12,7 +12,11 @@
 using namespace std;
 
 /**
- * TODO: add class header
+ * Binary Search Tree: A data Structure composed of Nodes containing
+ * some arbitrary datatype. Each Node may have up to 2 children Nodes.
+ * The left child being of lesser value than the parent, and the right
+ * child being of greater value than the parent. This organization allows
+ * for more efficient search algorithms that run in O(log(n)) time.
  */
 template <typename Data>
 class BST {
@@ -36,15 +40,25 @@ class BST {
      */
     BST() : root(0), isize(0), iheight(-1) {}
 
+<<<<<<< HEAD
     /** Copy constructor */
     BST(const BST<Data>& bst) : root(0), isize(0), iheight(-1) {
         vector<Data> v = bst.inorder();
         buildSubtree(v, 0, v.size(), -1);
     }
+=======
+    /** BST copy constructor that copies the current BST
+     * and transforms it into a balanced BST.
+     */
+    BST(const BST<Data>& bst) : root(0), isize(0), iheight(-1) {}
+>>>>>>> 2f88cc3dd1f0fda09508bcd09bd23e65a4853114
 
-    /** TODO */
+    /** BST destructor to properly deallocate memory of BST
+     * to avoid memory leaks
+     */
     ~BST() { deleteAll(root); }
 
+<<<<<<< HEAD
     /**
      * Inserts a BSTnode into the BST.
      *
@@ -55,6 +69,10 @@ class BST {
      *
      * @param item value of data for inserted BSTNode.
      * @return true if BSTNode inserted, false otherwise.
+=======
+    /** Adds a new Node containing a data item to the appropriate leaf
+     * in a BST
+>>>>>>> 2f88cc3dd1f0fda09508bcd09bd23e65a4853114
      */
     bool insert(const Data& item) {  // Creates root node if tree doesn't exist
         std::cout << item;
@@ -94,7 +112,10 @@ class BST {
         return false;
     }
 
-    /** TODO */
+    /** searches for a node containing data equivalent to item
+     * and returns an iterator pointing to that node if it exists
+     * otherwise it returns an iterator pointing to a nullptr
+     */
     iterator find(const Data& item) const {
         if (root == nullptr) {
             return end();
@@ -108,24 +129,80 @@ class BST {
             } else if (curr->getData() < item) {
                 curr = curr->right;
             }
-
             if (curr == nullptr) {
-                return BST<Data>::iterator(0);
+                return BST<Data>::iterator(nullptr);
+
+                if (curr == nullptr) {
+                    return BST<Data>::iterator(0);
+                }
             }
+            return BST<Data>::iterator(curr);
         }
-        return BST<Data>::iterator(curr);
     }
 
-    /** TODO */
-    bool deleteNode(const Data& item) { return false; }
+    /** This function searches for a node containing data
+     * equivalent to item. If it exists, that node is removed from the tree.
+     * This function returns true if a node is successfully deleted,
+     * false otherwise
+     */
+    bool deleteNode(const Data& item) {
+        if (root == nullptr) return false;
+        BSTNode<Data>* curr = root;
+        // while curr->getData() != item
+        while (!(!(curr->getData() < item) && !(item < curr->getData()))) {
+            if (item < curr->getData())
+                curr = curr->left;
+            else if (curr->getData() < item)
+                curr = curr->right;
+            if (curr == nullptr) return false;
+        }
 
-    /** TODO */
+        // if curr->getData() == item then this code will execute
+        // case 1 (no children)
+        if (curr->left == nullptr && curr->right == nullptr) {
+            // remove edge from curr->parent to curr
+            if (curr == curr->parent->left) {
+                curr = curr->parent;
+                delete curr->left;
+
+            } else {
+                curr = curr->parent;
+                delete curr->right;
+            }
+        }
+        // case 2 (1 child)
+        else if (curr->left == nullptr || curr->right == nullptr) {
+            // curr->parent point to curr->child instead of to curr
+            if (curr->left == nullptr) {
+                curr->parent = curr->right;
+                delete curr;
+            } else {
+                curr->parent = curr->left;
+                delete curr;
+            }
+        }
+        // case 3 (2 children)
+        else {
+            BSTNode<Data>* s = curr->successor();
+            if (s == s->parent->left) {
+                s->parent->left = s->right;
+                delete s;
+            } else {
+                s->parent->right = s->right;
+                curr->setData(s->getData());
+                delete s;
+            }
+        }
+        return true;
+    }
+
+    /** returns the number of nodes in the BST*/
     unsigned int size() const { return isize; }
 
-    /** TODO */
+    /** returns the maximum depth of the BST */
     int height() const { return getHeight(root); }
 
-    /** TODO */
+    /** returns true if there are no nodes in the BST, false otherwise */
     bool empty() const {
         if (isize == 0) {
             return true;
@@ -134,13 +211,15 @@ class BST {
         }
     }
 
-    /** TODO */
+    /** returns an iterator pointing to the root of the BST */
     iterator begin() const { return BST<Data>::iterator(first(root)); }
 
     /** Return an iterator pointing past the last item in the BST. */
     iterator end() const { return typename BST<Data>::iterator(0); }
 
-    /** TODO */
+    /** Returns a vector containing the elements of our BST
+     * in the order of the inorder traversal. (Left, Root, Right)
+     */
     vector<Data> inorder() const {
         vector<Data> list;
         if (root == nullptr) {
@@ -210,7 +289,9 @@ class BST {
         return curr;
     }
 
-    /** TODO */
+    /** Recursively deletes all Nodes of the BST
+     *  Helper method for BST destructor
+     */
     static void deleteAll(BSTNode<Data>* n) {
         // if current node is null: return;
         if (n == nullptr) {
@@ -241,6 +322,7 @@ class BST {
     }
 
     // Add more helper functions below
+    // Helper Method to determine maximum Depth of BST
     int getHeight(BSTNode<Data>* n) const {
         if (n == nullptr) {
             return -1;
