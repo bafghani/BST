@@ -40,25 +40,17 @@ class BST {
      */
     BST() : root(0), isize(0), iheight(-1) {}
 
-<<<<<<< HEAD
     /** Copy constructor */
     BST(const BST<Data>& bst) : root(0), isize(0), iheight(-1) {
         vector<Data> v = bst.inorder();
         buildSubtree(v, 0, v.size(), -1);
     }
-=======
-    /** BST copy constructor that copies the current BST
-     * and transforms it into a balanced BST.
-     */
-    BST(const BST<Data>& bst) : root(0), isize(0), iheight(-1) {}
->>>>>>> 2f88cc3dd1f0fda09508bcd09bd23e65a4853114
 
     /** BST destructor to properly deallocate memory of BST
      * to avoid memory leaks
      */
     ~BST() { deleteAll(root); }
 
-<<<<<<< HEAD
     /**
      * Inserts a BSTnode into the BST.
      *
@@ -69,10 +61,6 @@ class BST {
      *
      * @param item value of data for inserted BSTNode.
      * @return true if BSTNode inserted, false otherwise.
-=======
-    /** Adds a new Node containing a data item to the appropriate leaf
-     * in a BST
->>>>>>> 2f88cc3dd1f0fda09508bcd09bd23e65a4853114
      */
     bool insert(const Data& item) {  // Creates root node if tree doesn't exist
         std::cout << item;
