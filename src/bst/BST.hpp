@@ -91,7 +91,8 @@ class BST {
                 curr = curr->left;
             } else if (curr->getData() < item) {
                 curr = curr->right;
-            } else if (curr == nullptr) {
+            }
+            if (curr == nullptr) {
                 return BST<Data>::iterator(nullptr);
             }
         }
@@ -99,7 +100,54 @@ class BST {
     }
 
     /** TODO */
-    bool deleteNode(const Data& item) { return false; }
+    bool deleteNode(const Data& item) {
+        BSTNode<Data>* curr = root;
+        while (!(!(curr->getData() < item) && !(item < curr->getData()))) {
+            if (item < curr->getData())
+                curr = curr->left;
+            else if (curr->getData() < item)
+                curr = curr->right;
+            if (curr == nullptr) return false;
+        }
+        // if curr->getData() == item then this code will execute
+        // case 1 (no children)
+        if (curr->left == nullptr && curr->right == nullptr) {
+            // remove edge from curr->parent to curr
+            if (curr == curr->parent->left) {
+                curr = curr->parent;
+                curr->left = nullptr;
+                delete curr->left;
+            } else {
+                curr = curr->parent;
+                curr->right = nullptr;
+                delete curr->right;
+            }
+        }
+        // case 2 (1 child)
+        else if (curr->left == nullptr || curr->right == nullptr) {
+            // curr->parent point to curr->child instead of to curr
+            if (curr->left == nullptr) {
+                curr->parent = curr->right;
+                delete curr;
+            } else {
+                curr->parent = curr->left;
+                delete curr;
+            }
+        }
+        // case 3 (2 children)
+        else {
+            BSTNode<Data>* s = curr->successor();
+            if (s == s->parent->left) {
+                s->parent->left = s->right;
+                delete s;
+            } else {
+                s->parent->right = s->right;
+                curr->setData(s->getData());
+                delete s;
+            }
+        }
+        return true;
+    }
 
     /** TODO */
     unsigned int size() const { return isize; }
@@ -205,7 +253,7 @@ class BST {
     /** TODO */
     BSTNode<Data>* buildSubtree(vector<Data>& data, int start, int end,
                                 int depth) {
-        return 0;
+                return 0;
     }
 
     // Add more helper functions below
