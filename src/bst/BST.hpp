@@ -120,8 +120,8 @@ class BST {
             if (curr == nullptr) {
                 return BST<Data>::iterator(nullptr);
             }
-            return BST<Data>::iterator(curr);
-        }
+                }
+        return BST<Data>::iterator(curr);
     }
 
     /** This function searches for a node containing data
