@@ -24,7 +24,8 @@ class BSTIterator : public iterator<input_iterator_tag, Data> {
      * in this BSTIterator.
      */
     BSTIterator(BSTNode<Data>* curr) : curr(curr) {}
-
+    // getter method to get node from iterator
+    BSTNode<Data>* getNode() { return curr; }
     /** Dereference operator. */
     Data operator*() const { return curr->getData(); }
 

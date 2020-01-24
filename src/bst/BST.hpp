@@ -148,13 +148,14 @@ class BST {
         if (iter.operator==(none)) {
             return false;
         }
+        curr = iter.getNode();
 
         // if curr->getData() == item then this code will execute
         // case 1 (no children)
         if (curr->left == nullptr && curr->right == nullptr) {
             // remove edge from curr->parent to curr
             if (curr->parent != nullptr) {
-                if (curr = curr->parent->left) {
+                if (curr == curr->parent->left) {
                     curr->parent->left = nullptr;
                 } else {
                     curr->parent->right = nullptr;
