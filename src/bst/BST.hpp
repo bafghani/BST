@@ -125,7 +125,9 @@ class BST {
      * false otherwise
      */
     bool deleteNode(const Data& item) {
+        if (root == nullptr) return false;
         BSTNode<Data>* curr = root;
+        // while curr->getData() != item
         while (!(!(curr->getData() < item) && !(item < curr->getData()))) {
             if (item < curr->getData())
                 curr = curr->left;
@@ -133,18 +135,20 @@ class BST {
                 curr = curr->right;
             if (curr == nullptr) return false;
         }
+
         // if curr->getData() == item then this code will execute
         // case 1 (no children)
         if (curr->left == nullptr && curr->right == nullptr) {
             // remove edge from curr->parent to curr
             if (curr == curr->parent->left) {
                 curr = curr->parent;
-                curr->left = nullptr;
                 delete curr->left;
+                curr->left = nullptr;
+
             } else {
                 curr = curr->parent;
-                curr->right = nullptr;
                 delete curr->right;
+                curr->right = nullptr;
             }
         }
         // case 2 (1 child)

@@ -89,10 +89,9 @@ TEST_F(SmallBSTFixture, INORDER_TEST) {
     vect.push_back(100);
     ASSERT_EQ(bst.inorder(), vect);
 }
-/*
+/* TEST FAILS
 TEST_F(SmallBSTFixture, DELETE_NODE) {
     bst.deleteNode(100);
-    BSTIterator<Data>* iter(nullptr);
-    ASSERT_EQ(bst.find(100), iter);
+    ASSERT_EQ(bst.find(100), nullptr);
 }
 */
