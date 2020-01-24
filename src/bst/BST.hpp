@@ -40,18 +40,27 @@ class BST {
      */
     BST() : root(0), isize(0), iheight(-1) {}
 
-    /** BST copy constructor that copies the current BST
-     * and transforms it into a balanced BST.
-     */
-    BST(const BST<Data>& bst) : root(0), isize(0), iheight(-1) {}
+    /** Copy constructor */
+    BST(const BST<Data>& bst) : root(0), isize(0), iheight(-1) {
+        vector<Data> v = bst.inorder();
+        buildSubtree(v, 0, v.size(), -1);
+    }
 
     /** BST destructor to properly deallocate memory of BST
      * to avoid memory leaks
      */
     ~BST() { deleteAll(root); }
 
-    /** Adds a new Node containing a data item to the appropriate leaf
-     * in a BST
+    /**
+     * Inserts a BSTnode into the BST.
+     *
+     * Takes in reference to a data item and sets inserted
+     * BSTnode's data equal to the data item's value. If
+     * the data item value already exists in the BST, no BSTnode
+     * will be inserted.
+     *
+     * @param item value of data for inserted BSTNode.
+     * @return true if BSTNode inserted, false otherwise.
      */
     bool insert(const Data& item) {  // Creates root node if tree doesn't exist
         std::cout << item;
@@ -288,7 +297,18 @@ class BST {
     /** TODO */
     BSTNode<Data>* buildSubtree(vector<Data>& data, int start, int end,
                                 int depth) {
-        return 0;
+        if (start > end) {
+            return nullptr;
+        }
+
+        int mid = (start + end) / 2;
+        BSTNode<Data>* sortedRoot = new BSTNode<Data>(data[mid]);
+
+        sortedRoot->left = buildSubtree(data, start, mid - 1, depth);
+        depth++;
+        sortedRoot->right = buildSubtree(data, mid + 1, end, depth);
+
+        return sortedRoot;
     }
 
     // Add more helper functions below
