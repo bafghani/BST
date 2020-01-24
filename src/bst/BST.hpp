@@ -12,7 +12,11 @@
 using namespace std;
 
 /**
- * TODO: add class header
+ * Binary Search Tree: A data Structure composed of Nodes containing
+ * some arbitrary datatype. Each Node may have up to 2 children Nodes.
+ * The left child being of lesser value than the parent, and the right
+ * child being of greater value than the parent. This organization allows
+ * for more efficient search algorithms that run in O(log(n)) time.
  */
 template <typename Data>
 class BST {
