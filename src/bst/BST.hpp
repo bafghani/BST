@@ -139,20 +139,23 @@ class BST {
         if (root == nullptr) {
             return false;
         }
-        BSTNode<Data>* curr = root;
 
         // while curr->getData() != item
 
         BSTIterator<Data> iter = find(item);
-        BSTIterator<Data> none = BSTIterator<Data>(nullptr);
-        if (iter.operator==(none)) {
+        if (iter.getNode() == nullptr) {
             return false;
         }
-        curr = iter.getNode();
-
+        // cout << "set iter to find(item)";
+        BSTNode<Data>* curr = iter.getNode();
+        // cout << "set curr to iter";
+        if (curr == nullptr) {
+            return false;
+        }
+        // cout << "seg fault here";
         // if curr->getData() == item then this code will execute
         // case 1 (no children)
-        if (curr->left == nullptr && curr->right == nullptr) {
+        if (curr->right == nullptr && curr->left == nullptr) {
             // remove edge from curr->parent to curr
             if (curr->parent != nullptr) {
                 if (curr == curr->parent->left) {

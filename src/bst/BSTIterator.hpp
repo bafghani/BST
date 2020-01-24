@@ -44,7 +44,7 @@ class BSTIterator : public iterator<input_iterator_tag, Data> {
 
     /** TODO */
     bool operator==(BSTIterator<Data> const& other) const {
-        return this->curr == other.curr;
+        return curr == other.curr;
     }
 
     /** TODO */
