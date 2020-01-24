@@ -149,39 +149,38 @@ class BST {
         // case 1 (no children)
         if (curr->left == nullptr && curr->right == nullptr) {
             // remove edge from curr->parent to curr
-            if (curr == curr->parent->left) {
-                curr = curr->parent;
-                delete curr->left;
-                curr->left = nullptr;
-
-            } else {
-                curr = curr->parent;
-                delete curr->right;
-                curr->right = nullptr;
-            }
+            delete curr;
         }
         // case 2 (1 child)
         else if (curr->left == nullptr || curr->right == nullptr) {
             // curr->parent point to curr->child instead of to curr
             if (curr->left == nullptr) {
-                curr->parent = curr->right;
+                if (curr = curr->parent->right)
+                    curr->parent->right = curr->right;
+                else
+                    curr->parent->left = curr->right;
                 delete curr;
             } else {
-                curr->parent = curr->left;
+                if (curr = curr->parent->right)
+                    curr->parent->right = curr->left;
+                else
+                    curr->parent->left = curr->left;
                 delete curr;
             }
         }
         // case 3 (2 children)
         else {
             BSTNode<Data>* s = curr->successor();
-            if (s == s->parent->left) {
+            curr->setData(s->getData());
+            delete s;
+            /*if (s == s->parent->left) {
                 s->parent->left = s->right;
                 delete s;
             } else {
                 s->parent->right = s->right;
                 curr->setData(s->getData());
                 delete s;
-            }
+            }*/
         }
         return true;
     }
