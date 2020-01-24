@@ -1,5 +1,6 @@
 /**
- * TODO: add file header
+ * Name: Joseph Mattingly
+ * Name: Bijan Afghani
  */
 #ifndef BSTITERATOR_HPP
 #define BSTITERATOR_HPP
@@ -41,14 +42,14 @@ class BSTIterator : public iterator<input_iterator_tag, Data> {
     }
 
     /** TODO */
-    bool operator==(BSTIterator<Data> const& other) const { 
-        return curr == other.curr;
-     }
+    bool operator==(BSTIterator<Data> const& other) const {
+        return this->curr == other.curr;
+    }
 
     /** TODO */
-    bool operator!=(BSTIterator<Data> const& other) const { 
-      return curr != other.curr;
-     }
+    bool operator!=(BSTIterator<Data> const& other) const {
+        return this->curr != other.curr;
+    }
 };
 
 #endif  // BSTITERATOR_HPP

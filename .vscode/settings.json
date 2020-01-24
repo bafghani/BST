@@ -1,4 +1,11 @@
 {
     "editor.formatOnSave": true,
-    "gitlens.blame.compact": false
+    "gitlens.blame.compact": false,
+    "files.associations": {
+        "array": "cpp",
+        "string_view": "cpp",
+        "initializer_list": "cpp",
+        "utility": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
 }

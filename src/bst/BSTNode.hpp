@@ -1,6 +1,8 @@
 /**
- * TODO: add file header
+ * Name: Joseph Mattingly
+ * Name: Bijan Afghani
  */
+
 #ifndef BSTNODE_HPP
 #define BSTNODE_HPP
 #include <iomanip>
@@ -22,9 +24,9 @@ class BSTNode {
 
     /** TODO */
     BSTNode(const Data& d) : data(d) {
-        this->left = nullptr;
-        this->right = nullptr;
-        this->parent = nullptr;
+        left = nullptr;
+        right = nullptr;
+        parent = nullptr;
     }
 
     /** Set the value of data */
@@ -35,7 +37,7 @@ class BSTNode {
 
     /** TODO */
     BSTNode<Data>* successor() {
-        BSTNode<Data>* curr;  // pointer to current node
+        BSTNode<Data>* curr = this;  // pointer to current node
 
         // if right child exists sets curr to right child
         if (this->right != nullptr) {

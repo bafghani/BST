@@ -1,5 +1,6 @@
 /**
- * TODO: add file header
+ * Name: Joseph Mattingly
+ * Name: Bijan Afghani
  */
 #ifndef BST_HPP
 #define BST_HPP
@@ -43,6 +44,7 @@ class BST {
 
     /** TODO */
     bool insert(const Data& item) {  // Creates root node if tree doesn't exist
+        std::cout << item;
         if (root == nullptr) {
             root = new BSTNode<Data>(item);
             isize++;
@@ -84,6 +86,7 @@ class BST {
         if (root == nullptr) {
             return end();
         }
+
         BSTNode<Data>* curr = root;
 
         while (!(!(curr->getData() < item) && !(item < curr->getData()))) {
@@ -92,8 +95,14 @@ class BST {
             } else if (curr->getData() < item) {
                 curr = curr->right;
             }
+<<<<<<< HEAD
             if (curr == nullptr) {
                 return BST<Data>::iterator(nullptr);
+=======
+
+            if (curr == nullptr) {
+                return BST<Data>::iterator(0);
+>>>>>>> 91a384cff71631d4eb4fdd794e187b1bee5eed0f
             }
         }
         return BST<Data>::iterator(curr);
@@ -229,11 +238,14 @@ class BST {
     /** TODO Helper function for begin() */
     static BSTNode<Data>* first(BSTNode<Data>* root) {
         BSTNode<Data>* curr = root;
-        if (curr != nullptr) {
-            while (curr->left != nullptr) {
-                curr = curr->left;
-            }
+        if (curr == nullptr) {
+            return nullptr;
         }
+
+        while (curr->left != nullptr) {
+            curr = curr->left;
+        }
+
         return curr;
     }
 

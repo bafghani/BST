@@ -1,3 +1,8 @@
+/**
+ * Name: Joseph Mattingly
+ * Name: Bijan Afghani
+ */
+
 #include <algorithm>
 #include <fstream>
 #include <iostream>
