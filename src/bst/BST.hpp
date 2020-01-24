@@ -43,7 +43,7 @@ class BST {
     /** Copy constructor */
     BST(const BST<Data>& bst) : root(0), isize(0), iheight(-1) {
         vector<Data> v = bst.inorder();
-        buildSubtree(v, 0, v.size(), -1);
+        root = buildSubtree(v, 0, v.size(), -1);
     }
 
     /** BST destructor to properly deallocate memory of BST
@@ -126,7 +126,7 @@ class BST {
             }
             return BST<Data>::iterator(curr);
         }
-    }
+        }
 
     /** This function searches for a node containing data
      * equivalent to item. If it exists, that node is removed from the tree.
@@ -301,6 +301,7 @@ class BST {
 
         int mid = (start + end) / 2;
         BSTNode<Data>* sortedRoot = new BSTNode<Data>(data[mid]);
+        isize++;
 
         sortedRoot->left = buildSubtree(data, start, mid - 1, depth);
         depth++;
