@@ -29,6 +29,7 @@ class BST {
 
     // height of this BST.
     int iheight;
+
   public:
     /** Define iterator as an aliased typename for BSTIterator<Data>. */
     typedef BSTIterator<Data> iterator;
@@ -42,7 +43,7 @@ class BST {
     /** Copy constructor */
     BST(const BST<Data>& bst) : root(0), isize(0), iheight(-1) {
         auto orderedVector = bst.inorder();
-        root = buildSubtree(orderedVector, 0, orderedVector.size(), -1);
+        root = buildSubtree(orderedVector, 0, orderedVector.size() - 1, -1);
         isize = bst.size();
         iheight = getHeight(root);
     }
