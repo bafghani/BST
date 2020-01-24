@@ -44,6 +44,8 @@ class BST {
     BST(const BST<Data>& bst) : root(0), isize(0), iheight(-1) {
         auto orderedVector = bst.inorder();
         root = buildSubtree(orderedVector, 0, orderedVector.size(), -1);
+        isize = bst.size();
+        iheight = getHeight(root);
     }
 
     /** BST destructor to properly deallocate memory of BST
@@ -369,10 +371,12 @@ class BST {
         if (start > end) {
             return nullptr;
         }
+        if (data.empty()) {
+            return nullptr;
+        }
 
         int mid = (start + end) / 2;
         BSTNode<Data>* root = new BSTNode<Data>(data[mid]);
-        isize++;
 
         root->left = buildSubtree(data, start, mid - 1, depth);
         root->left->parent = root;
