@@ -158,7 +158,6 @@ class BST {
                 }
             }
             delete curr;
-            return true;
         }
 
         // case 2 (1 child)
@@ -174,7 +173,6 @@ class BST {
                 }
 
                 delete curr;
-                return true;
             } else {
                 if (curr->parent != nullptr) {
                     if (curr = curr->parent->right) {
@@ -184,7 +182,6 @@ class BST {
                     }
                 }
                 delete curr;
-                return true;
             }
         }
 
