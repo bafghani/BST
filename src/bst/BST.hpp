@@ -159,6 +159,8 @@ class BST {
                 } else {
                     curr->parent->right = nullptr;
                 }
+            } else {
+                root = nullptr;
             }
             isize--;
             delete curr;
@@ -239,13 +241,13 @@ class BST {
                     s->right->parent = s->parent;
                     s->parent->left = s->right;
                 }
-                curr->setData(s->getData());
             }
+            curr->setData(s->getData());
             delete s;
             isize--;
         }
 
-        // iheight = height();
+        iheight = height();
         return true;
     }
 
