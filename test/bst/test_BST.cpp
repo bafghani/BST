@@ -88,13 +88,11 @@ TEST_F(SmallBSTFixture, INORDER_TEST) {
     vect.push_back(4);
     vect.push_back(100);
     ASSERT_EQ(bst.inorder(), vect);
-<<<<<<< HEAD
 }
-=======
+/*
+TEST_F(SmallBSTFixture, DELETE_NODE) {
+    bst.deleteNode(100);
+    BSTIterator<Data>* iter(nullptr);
+    ASSERT_EQ(bst.find(100), iter);
 }
-
-TEST_F(SmallBSTFixture, DELETE_ALL) {
-    bst.~BST();
-    ASSERT_TRUE(bst.insert(3));
-}
->>>>>>> 91a384cff71631d4eb4fdd794e187b1bee5eed0f
+*/

@@ -36,13 +36,19 @@ class BST {
      */
     BST() : root(0), isize(0), iheight(-1) {}
 
-    /** TODO */
+    /** BST copy constructor that copies the current BST
+     * and transforms it into a balanced BST.
+     */
     BST(const BST<Data>& bst) : root(0), isize(0), iheight(-1) {}
 
-    /** TODO */
+    /** BST destructor to properly deallocate memory of BST
+     * to avoid memory leaks
+     */
     ~BST() { deleteAll(root); }
 
-    /** TODO */
+    /** Adds a new Node containing a data item to the appropriate leaf
+     * in a BST
+     */
     bool insert(const Data& item) {  // Creates root node if tree doesn't exist
         std::cout << item;
         if (root == nullptr) {
@@ -81,7 +87,10 @@ class BST {
         return false;
     }
 
-    /** TODO */
+    /** searches for a node containing data equivalent to item
+     * and returns an iterator pointing to that node if it exists
+     * otherwise it returns an iterator pointing to a nullptr
+     */
     iterator find(const Data& item) const {
         if (root == nullptr) {
             return end();
@@ -95,20 +104,22 @@ class BST {
             } else if (curr->getData() < item) {
                 curr = curr->right;
             }
-<<<<<<< HEAD
             if (curr == nullptr) {
                 return BST<Data>::iterator(nullptr);
-=======
 
-            if (curr == nullptr) {
-                return BST<Data>::iterator(0);
->>>>>>> 91a384cff71631d4eb4fdd794e187b1bee5eed0f
+                if (curr == nullptr) {
+                    return BST<Data>::iterator(0);
+                }
             }
+            return BST<Data>::iterator(curr);
         }
-        return BST<Data>::iterator(curr);
     }
 
-    /** TODO */
+    /** This function searches for a node containing data
+     * equivalent to item. If it exists, that node is removed from the tree.
+     * This function returns true if a node is successfully deleted,
+     * false otherwise
+     */
     bool deleteNode(const Data& item) {
         BSTNode<Data>* curr = root;
         while (!(!(curr->getData() < item) && !(item < curr->getData()))) {
@@ -158,13 +169,13 @@ class BST {
         return true;
     }
 
-    /** TODO */
+    /** returns the number of nodes in the BST*/
     unsigned int size() const { return isize; }
 
-    /** TODO */
+    /** returns the maximum depth of the BST */
     int height() const { return getHeight(root); }
 
-    /** TODO */
+    /** returns true if there are no nodes in the BST, false otherwise */
     bool empty() const {
         if (isize == 0) {
             return true;
@@ -173,13 +184,15 @@ class BST {
         }
     }
 
-    /** TODO */
+    /** returns an iterator pointing to the root of the BST */
     iterator begin() const { return BST<Data>::iterator(first(root)); }
 
     /** Return an iterator pointing past the last item in the BST. */
     iterator end() const { return typename BST<Data>::iterator(0); }
 
-    /** TODO */
+    /** Returns a vector containing the elements of our BST
+     * in the order of the inorder traversal. (Left, Root, Right)
+     */
     vector<Data> inorder() const {
         vector<Data> list;
         if (root == nullptr) {
@@ -249,7 +262,9 @@ class BST {
         return curr;
     }
 
-    /** TODO */
+    /** Recursively deletes all Nodes of the BST
+     *  Helper method for BST destructor
+     */
     static void deleteAll(BSTNode<Data>* n) {
         // if current node is null: return;
         if (n == nullptr) {
@@ -265,10 +280,11 @@ class BST {
     /** TODO */
     BSTNode<Data>* buildSubtree(vector<Data>& data, int start, int end,
                                 int depth) {
-                return 0;
+        return 0;
     }
 
     // Add more helper functions below
+    // Helper Method to determine maximum Depth of BST
     int getHeight(BSTNode<Data>* n) const {
         if (n == nullptr) {
             return -1;
