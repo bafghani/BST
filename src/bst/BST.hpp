@@ -126,7 +126,7 @@ class BST {
             }
             return BST<Data>::iterator(curr);
         }
-        }
+    }
 
     /** This function searches for a node containing data
      * equivalent to item. If it exists, that node is removed from the tree.
@@ -155,21 +155,25 @@ class BST {
         else if (curr->left == nullptr || curr->right == nullptr) {
             // curr->parent point to curr->child instead of to curr
             if (curr->left == nullptr) {
-                if (curr = curr->parent->right)
-                    curr->parent->right = curr->right;
-                else
-                    curr->parent->left = curr->right;
+                if (curr->parent != nullptr) {
+                    if (curr = curr->parent->right)
+                        curr->parent->right = curr->right;
+                    else
+                        curr->parent->left = curr->right;
+                }
                 delete curr;
             } else {
-                if (curr = curr->parent->right)
-                    curr->parent->right = curr->left;
-                else
-                    curr->parent->left = curr->left;
+                if (curr->parent != nullptr) {
+                    if (curr = curr->parent->right)
+                        curr->parent->right = curr->left;
+                    else
+                        curr->parent->left = curr->left;
+                }
                 delete curr;
             }
         }
         // case 3 (2 children)
-        else {
+        else if {
             BSTNode<Data>* s = curr->successor();
             curr->setData(s->getData());
             delete s;
