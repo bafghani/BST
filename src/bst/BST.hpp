@@ -131,7 +131,7 @@ class BST {
                 curr = curr->left;
             } else if (curr->getData() < item) {
                 if (curr->right == nullptr) {
-                    BST<Data>::iterator(0);
+                    return BST<Data>::iterator(0);
                 }
                 curr = curr->right;
             } else {
