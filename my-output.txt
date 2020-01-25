@@ -10,3 +10,16 @@ Iterator: 5
 Iterator: Hit end of tree
 Iterator: Cannot traverse to next; hit end of tree
 Printing BST Structure
+1				
+X		3		
+X	X	X	5	
+BST balanced
+Printing BST Structure
+3		
+1	5	
+Height: 1
+Size: 3
+Delete: Successfully deleted value 5
+Printing BST Structure
+3		
+1	X	

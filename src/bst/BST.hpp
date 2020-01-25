@@ -1,6 +1,8 @@
 /**
  * Name: Joseph Mattingly
  * Name: Bijan Afghani
+ * This file contains code to implement a fully functional
+ * Binary Search Tree Data Structure
  */
 #ifndef BST_HPP
 #define BST_HPP
@@ -40,7 +42,10 @@ class BST {
      */
     BST() : root(0), isize(0), iheight(-1) {}
 
-    /** Copy constructor */
+    /** Copy constructor
+     * copies current tree and creates a new balanced tree
+     * @param bst the current tree we want to copy
+     */
     BST(const BST<Data>& bst) : root(0), isize(0), iheight(-1) {
         auto orderedVector = bst.inorder();
         root = buildSubtree(orderedVector, 0, orderedVector.size() - 1, -1);
@@ -109,6 +114,9 @@ class BST {
     /** searches for a node containing data equivalent to item
      * and returns an iterator pointing to that node if it exists
      * otherwise it returns an iterator pointing to a nullptr
+     * @param item the data item we want to find
+     * @return an iterator containing the node we want or
+     * if it does not exist an iterator containing a nullptr
      */
     iterator find(const Data& item) const {
         BSTNode<Data>* curr = root;
@@ -134,7 +142,8 @@ class BST {
 
     /** This function searches for a node containing data
      * equivalent to item. If it exists, that node is removed from the tree.
-     * This function returns true if a node is successfully deleted,
+     * @param item, the data item we would like to delete
+     * @return This function returns true if a node is successfully deleted,
      * false otherwise
      */
     bool deleteNode(const Data& item) {
@@ -257,13 +266,13 @@ class BST {
         return true;
     }
 
-    /** returns the number of nodes in the BST*/
+    /** @return the number of nodes in the BST*/
     unsigned int size() const { return isize; }
 
-    /** returns the maximum depth of the BST */
+    /** @return the maximum depth of the BST */
     int height() const { return getHeight(root); }
 
-    /** returns true if there are no nodes in the BST, false otherwise */
+    /** @return true if there are no nodes in the BST, false otherwise */
     bool empty() const {
         if (isize == 0) {
             return true;
@@ -272,13 +281,16 @@ class BST {
         }
     }
 
-    /** returns an iterator pointing to the root of the BST */
+    /** returns an iterator pointing to the root of the BST
+     * @return iterator containing the first element to traverse
+     *
+     */
     iterator begin() const { return BST<Data>::iterator(first(root)); }
 
-    /** Return an iterator pointing past the last item in the BST. */
+    /** @return an iterator pointing past the last item in the BST. */
     iterator end() const { return typename BST<Data>::iterator(0); }
 
-    /** Returns a vector containing the elements of our BST
+    /** @return a vector containing the elements of our BST
      * in the order of the inorder traversal. (Left, Root, Right)
      */
     vector<Data> inorder() const {
@@ -352,6 +364,7 @@ class BST {
 
     /** Recursively deletes all Nodes of the BST
      *  Helper method for BST destructor
+     * @param root node
      */
     static void deleteAll(BSTNode<Data>* n) {
         // if current node is null: return;
@@ -365,25 +378,35 @@ class BST {
         delete n;
     }
 
-    /** TODO */
+    /** Balances the tree given a vector of its data in increasing order
+     * @param data inorder vector of node data
+     *        start the first index of data
+     *        end the entry past the last entry of data
+     *        depth the number of times to recurse
+     * @return root node of the new tree
+     */
     const int BALANCE = 2;
     BSTNode<Data>* buildSubtree(vector<Data>& data, int start, int end,
                                 int depth) {
+        // base case
         if (start > end) {
             return nullptr;
         }
+        // if empty vector return nullptr
         if (data.size() == 0) {
             return nullptr;
         }
+        // edge case for last node
         if (start == end) {
             BSTNode<Data>* node = new BSTNode<Data>(data[end]);
             return node;
         }
+        // median index
         int length = 1 + end - start;
         int mid = start + (length) / BALANCE;
 
         BSTNode<Data>* root = new BSTNode<Data>(data[mid]);
-
+        // recursively build left and right subtree
         root->left = buildSubtree(data, start, mid - 1, depth);
         root->left->parent = root;
         if (mid < end) {

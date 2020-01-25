@@ -1,6 +1,7 @@
 /**
  * Name: Joseph Mattingly
  * Name: Bijan Afghani
+ * This file creates the individual Node structures
  */
 
 #ifndef BSTNODE_HPP
@@ -10,7 +11,10 @@
 using namespace std;
 
 /**
- * TODO: add class header
+ * This file creates the structure of each BST Node
+ * each node contains pointers and a data item
+ * There are standard setters and getters to access
+ * data along with overloaded operators
  */
 template <typename Data>
 class BSTNode {
@@ -22,7 +26,9 @@ class BSTNode {
     BSTNode<Data>* right;
     BSTNode<Data>* parent;
 
-    /** TODO */
+    /** initializes a BSTNode with data d
+     * @param d the data we would like to initialize our node with
+     */
     BSTNode(const Data& d) : data(d) {
         setData(d);
         left = nullptr;

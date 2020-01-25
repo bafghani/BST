@@ -11,7 +11,9 @@
 using namespace std;
 
 /**
- * TODO: add class header
+ * This file creates the BST Iterator object to traverse from node to node
+ * Contains getter for getting the node from iterator along with
+ * overloaded operators
  */
 template <typename Data>
 class BSTIterator : public iterator<input_iterator_tag, Data> {
@@ -22,6 +24,7 @@ class BSTIterator : public iterator<input_iterator_tag, Data> {
     /**
      * Constructor that initialize the current BSTNode
      * in this BSTIterator.
+     * @param node we would like to initialize Iterator with
      */
     BSTIterator(BSTNode<Data>* curr) : curr(curr) {}
     // getter method to get node from iterator
@@ -42,12 +45,12 @@ class BSTIterator : public iterator<input_iterator_tag, Data> {
         return before;
     }
 
-    /** TODO */
+    /** equality operator */
     bool operator==(BSTIterator<Data> const& other) const {
         return curr == other.curr;
     }
 
-    /** TODO */
+    /** non equality operator */
     bool operator!=(BSTIterator<Data> const& other) const {
         return this->curr != other.curr;
     }
